@@ -1,0 +1,27 @@
+header .header-link {
+  text-decoration: none;
+  color: #4B5157;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+
+header .header-link:hover {
+  color: black;
+  transition: 0.3s;
+}
+
+header .header-link::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: width 0.3s ease-out;
+}
+
+header .header-link:hover::before {
+  width: 110%;
+}
