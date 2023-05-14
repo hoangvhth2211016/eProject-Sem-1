@@ -1,1 +1,36 @@
-<p>about works!</p>
+<app-header></app-header>
+<div class="container about-us">
+  <div class="row decription">
+    <div class="col-left col-md-3"></div>
+    <div class="col-right col-md-9 col-sm-12">
+      <a routerLink="#">Home > </a>
+      <a routerLink="#">About Us</a>
+      <br>
+      <br>
+      <h3>About Us</h3>
+      <br>
+      <hr class="line">
+      <br>
+      <p>
+        My Jewellery Shop is an independent family jeweller with over 40 years' experience and expertise in the beautiful world of jewellery. We are passionate about offering the highest quality of service and our wealth of knowledge guarantees you and your precious jewellery will be exceptionally cared for.
+      </p>
+      <p>
+        We specialise in the finest quality jewellery repairs, remodelling and custom designs, and offer a one-on-one, personalised design service with quality workmanship and attention to detail. Experience a seamless and educational journey to creating the perfect engagement ring by remaining involved in the process from start to finish. Our gemstone collection includes an exclusive range of loose diamonds available from all around the world, including GIA Certified, Antwerp Diamonds. If you have something out of the ordinary in mind, we can source this for you.
+      </p>
+      <p>
+        As Vietnamese’s Premier Online and Vietnamese Award Winning Jewellery Retailer, My Jewellery Shop is far more than a store, it is an experience. Enjoy shopping in style at our beautiful boutique store on the Duong Dinh Nghe Str, Cau Giay Dict, Hanoi or shop with us online 24/7. Our extensive range of fine jewellery includes signature collections of yellow, white and rose gold, in addition to hand-picked precious gemstone and pearl pieces. We also carry a select range of beautiful watches and exceptional sterling silver jewellery.
+      </p>
+      <p>
+        Feel free to email us for some personal advice, it's what we do best. We are available to help you source a specific piece of jewellery, loose diamond, or to guide you through the process of deciding exactly what is right for that special someone - maybe even yourself! You can email us on <a routerLink="#">service@myjewelleryshop.com.vn</a>
+      </p>
+      <p>ENJOY!</p>
+    </div>
+  </div>
+  <div class="row image">
+    <div class="col-left col-md-3 col-sm-12"></div>
+    <div *ngFor = "let image of images" class="col-image col-md-3 col-sm-12">
+      <img src="{{image}}" alt="">
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

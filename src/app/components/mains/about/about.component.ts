@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AboutComponent {
 
+  images = ["../../../../assets/images/aboutUsImage/aboutUs2.jpg",
+            "../../../../assets/images/aboutUsImage/aboutUs2.jpg",
+            "../../../../assets/images/aboutUsImage/aboutUs3.jpg"];
+
 }
