@@ -1,0 +1,12 @@
+.detail a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.detail input {
+  width: 20%;
+}
+
+.detail hr {
+  width: 10%;
+}

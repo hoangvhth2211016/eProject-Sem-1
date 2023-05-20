@@ -1,1 +1,41 @@
-<p>comparison works!</p>
+<section class="comparison">
+  <div class="container my-5 p-4 shadow-sm">
+    <div class="mb-5">
+      <h1 class="text-uppercase">compare</h1>
+      <p>Keep track of your compared items</p>
+    </div>
+    <div class="m-5" *ngIf="products.length === 0">
+      <h2>Oh no!</h2>
+      <p>Your Compare List is empty</p>
+      <p>
+        go back to our
+        <a routerLink="/categories/all-products"> products page</a> to discover our products!
+      </p>
+    </div>
+    <div class="row text-center my-5">
+      <div *ngFor="let product of products; index as i" class="col-6">
+        <ul class="list-group list-group-flush text-center mx-5">
+          <li class="list-group-item position-relative">
+            <img class="img-fluid w-75" [src]="product.image" [alt]="product.name">
+            <i class="bi bi-x-circle fs-2 position-absolute top-0 end-0 translate-middle delete-btn"
+              (click)="removeFromCompareList(i)"></i>
+          </li>
+          <li class="list-group-item">
+            <h5 class="fw-semibold text-capitalize">{{product.name}}</h5>
+          </li>
+          <li class="list-group-item">{{product.price | currency}}</li>
+          <li class="list-group-item">
+            <span *ngFor="let p of product.categories; index as i">
+              {{ p.name }}
+            </span>
+          </li>
+          <li class="list-group-item">{{product.weight}}</li>
+          <li class="list-group-item">{{product.size}}</li>
+          <li class="list-group-item">{{product.origin}}</li>
+          <li class="list-group-item"><button class="btn btn-dark" routerLink="/products/{{product.id}}">Detail</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,1 +1,33 @@
-<p>products works!</p>
+<div class="container my-1">
+  <app-banner [products]="someProducts"></app-banner>
+</div>
+<section class="products">
+  <div class="container my-5">
+    <div class="row">
+      <!-- categories list -->
+      <div class="col-12 col-md-2 mt-5">
+        <div class="categories-list">
+          <h2 class="mb-5 border-bottom border-2">Categories</h2>
+          <div class="my-3 ms-2">
+            <a (click)="getAll()">All</a>
+          </div>
+          <div class="my-3 ms-2 text-capitalize" *ngFor="let category of categories">
+            <a (click)="sortProducts(category.name)">{{ category.name
+              }}</a>
+          </div>
+        </div>
+      </div>
+      <!-- end of categories list -->
+      <!-- show products -->
+      <div class="col-12 col-md-10">
+        <div class="py-3 ps-4">
+          <h1 class="text-uppercase pb-3">products</h1>
+          <hr>
+        </div>
+        <app-product-cards [products]="products"></app-product-cards>
+      </div>
+      <!-- end of show products -->
+    </div>
+  </div>
+
+</section>

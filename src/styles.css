@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "WorkSans";
+  src: local("Montserrat"), url("/assets/font/WorkSans-VariableFont_wght.ttf") format("truetype");
+}
+
+* {
+  font-family: "WorkSans";
+}
+
+h1,
+h2 {
+  font-family: serif;
+  color: #b69f7a;
+}
+
+.bg-color {
+  background-color: #FBFBFA;
+}

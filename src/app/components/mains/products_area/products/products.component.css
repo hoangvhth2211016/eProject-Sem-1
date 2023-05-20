@@ -1,0 +1,31 @@
+.products a {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.products .categories-list a {
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 3px;
+}
+
+.products .categories-list a:hover {
+  transition: 0.3s;
+}
+
+.products .categories-list a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: width 0.3s ease-out;
+}
+
+.products .categories-list a:hover::before {
+  width: 100%;
+}

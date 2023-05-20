@@ -1,0 +1,9 @@
+.comparison .delete-btn {
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.comparison .delete-btn:hover {
+  opacity: 1;
+}

@@ -1,0 +1,8 @@
+<section class="cart">
+  <div class="container">
+    <p *ngFor="let item of cart.cartItems">
+      {{item.product.name}}
+    </p>
+    <h1>{{cart.total}}</h1>
+  </div>
+</section>

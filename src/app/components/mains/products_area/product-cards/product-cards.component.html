@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-3" *ngFor="let product of products">
+    <div class="product-card my-3 position-relative" routerLink="/products/{{ product.id }}">
+      <img class="img-fluid " alt="{{ product.name }} " src="{{ product.image }}" />
+      <div class="mx-2 py-3">
+        <p class="product-name text-capitalize fw-semibold my-1">{{ product.name }}</p>
+        <p class="mb-0">{{ product.price | currency }}</p>
+        <a class="text-black-50" (click)="addToCompareList(product, $event)"><i
+            class="bi bi-clipboard-plus fs-5 me-2 align-middle"></i>Comparison</a>
+      </div>
+      <div class="position-absolute top-0 start-0 m-2">
+        <span class="bg-success text-white opacity-50 p-1" *ngIf="product.newArrival">new</span>
+        <span class="bg-danger text-white opacity-50 p-1" *ngIf="product.offer">offer</span>
+      </div>
+    </div>
+  </div>
+</div>

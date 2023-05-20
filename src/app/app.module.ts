@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,8 +13,9 @@ import { ProductsComponent } from './components/mains/products_area/products/pro
 import { DetailComponent } from './components/mains/products_area/detail/detail.component';
 import { ComparisonComponent } from './components/mains/products_area/comparison/comparison.component';
 import { HomeComponent } from './components/home/home.component';
-import { SalesComponent } from './components/mains/products_area/sales/sales.component';
-import { NewArrivalComponent } from './components/mains/products_area/new-arrival/new-arrival.component';
+import { MessageComponent } from './components/mains/message/message.component';
+import { ProductCardsComponent } from './components/mains/products_area/product-cards/product-cards.component';
+import { CartComponent } from './components/mains/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +29,15 @@ import { NewArrivalComponent } from './components/mains/products_area/new-arriva
     DetailComponent,
     ComparisonComponent,
     HomeComponent,
-    SalesComponent,
-    NewArrivalComponent
+    MessageComponent,
+    ProductCardsComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
