@@ -1,0 +1,7 @@
+.cart .button {
+  cursor: pointer;
+}
+
+.cart .qty-input {
+  width: 5rem;
+}

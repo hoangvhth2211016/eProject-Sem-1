@@ -1,5 +1,5 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <nav class="navbar navbar-expand-lg navbar-light shadow-sm">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/">
         <img src="assets/images/crystal_logo.svg" alt="logo" width="200">
@@ -26,12 +26,23 @@
             <a class="header-link mx-3 text-uppercase" routerLink="categories/special-offers">special offer</a>
           </li>
           <li class="nav-item">
-            <a class="header-link mx-3 text-uppercase" routerLink="products/comparison">comparison</a>
-          </li>
-          <li class="nav-item">
             <a class="header-link mx-3 text-uppercase" routerLink="contact">contact</a>
           </li>
         </ul>
+      </div>
+      <div class="">
+        <a class="text-decoration-none text-dark position-relative p-1 me-4" routerLink="products/comparison">
+          <i class="bi bi-clipboard-plus fs-4"></i>
+          <span
+            class="notification position-absolute top-0 start-100 translate-middle bg-danger text-white rounded-pill"
+            *ngIf="compareList && compareList.length>0">{{compareList.length}}</span>
+        </a>
+        <a class="text-decoration-none text-dark position-relative p-1 me-4" routerLink="cart">
+          <i class="bi bi-cart3 fs-4"></i>
+          <span
+            class="notification position-absolute top-0 start-100 translate-middle bg-danger text-white rounded-pill"
+            *ngIf="cart && cart.cartProducts.length>0">{{cart.cartProducts.length}}</span>
+        </a>
       </div>
     </div>
   </nav>

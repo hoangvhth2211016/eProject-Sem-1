@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-3" *ngFor="let product of products">
+  <div class="col-6 col-md-3" *ngFor="let product of products">
     <div class="product-card my-3 position-relative" routerLink="/products/{{ product.id }}">
       <img class="img-fluid " alt="{{ product.name }} " src="{{ product.image }}" />
       <div class="mx-2 py-3">

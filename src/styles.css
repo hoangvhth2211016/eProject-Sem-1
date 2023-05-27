@@ -9,11 +9,25 @@
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: serif;
   color: #b69f7a;
 }
 
 .bg-color {
   background-color: #FBFBFA;
+}
+
+.border-color {
+  border-style: solid;
+  border-color: #86A8AA;
+}
+
+.text-color {
+  color: #86A8AA;
+}
+
+.text-color-success {
+  color: #49AF42;
 }

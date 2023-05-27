@@ -1,8 +1,8 @@
 import { Product } from "../Product/product.model";
 
-export class CartItem {
+export class CartProduct {
   product: Product;
-  quantity: number = 1;
+  quantity: number;
 
   constructor(product: Product, quantity: number) {
     this.product = product;

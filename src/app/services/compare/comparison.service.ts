@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from 'src/app/models/Product/product.model';
 
 @Injectable({
@@ -6,8 +7,11 @@ import { Product } from 'src/app/models/Product/product.model';
 })
 export class ComparisonService {
   compareList!: Product[];
+  compareSubject: BehaviorSubject<Product[]>;
+
   constructor() {
     this.compareList = this.getCompareList();
+    this.compareSubject = new BehaviorSubject(this.compareList);
   }
 
   // get compare list from local storage
@@ -19,6 +23,12 @@ export class ComparisonService {
   setCompareList() {
     const compareListJson = JSON.stringify(this.compareList);
     localStorage.setItem('CompareList', compareListJson);
+    this.compareSubject.next(this.compareList);
+  }
+
+  // observe compare list
+  observeCompareList(): Observable<Product[]> {
+    return this.compareSubject.asObservable();
   }
 
   // add to compare list

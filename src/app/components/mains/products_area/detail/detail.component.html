@@ -4,7 +4,7 @@
       <div class="col-12 col-md-12 col-lg-6">
         <img class="img-fluid" alt="{{ product.name }} " src="{{ product.image }}" />
       </div>
-      <div class="col-6 col-md-12 col-lg-6 ps-5">
+      <div class="col-12 col-md-12 col-lg-6 px-5">
         <span class="ms">
           <a routerLink="">Home</a>
           /
@@ -12,7 +12,7 @@
           /
           <span>{{ product.name }}</span>
         </span>
-        <div class="row">
+        <div>
           <div class="my-2">
             <h1 class="text-capitalize">{{ product.name }}</h1>
           </div>
@@ -25,7 +25,7 @@
           </div>
           <p>Approximate Weight: {{product.weight}}<br>Approximate Size: {{product.size}}</p>
           <p>Country of Origin: {{product.origin}}</p>
-
+          <p>Available in our Store in Ha Noi, Vietnam. <a class="text-dark" routerLink="/contact">Contact Us</a></p>
           <div class="mt-2">
             <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
               <div class="d-flex align-items-center">
@@ -39,12 +39,15 @@
                 </div>
               </div>
               <div class="my-4">
-                <button class="btn btn-outline-danger me-5" type="submit">
+                <button class="btn btn-outline-danger px-3 py-2 text-uppercase">
                   Add To Cart
                 </button>
-                <a (click)="addToCompareList(product)" class="text-capitalize text-dark">
+                <a (click)="addToCompareList(product)" class="text-capitalize text-dark mx-5 text-decoration-none">
                   <i class="bi bi-clipboard-plus fs-4 me-2 align-middle"></i>
                   comparison</a>
+                <a (click)="downloadDoc()" class="text-capitalize text-dark text-decoration-none">
+                  <i class="bi bi-filetype-docx fs-4 me-2 align-middle"></i>
+                  document</a>
               </div>
             </form>
             <div class="d-flex my-3">
@@ -75,9 +78,9 @@
     <div class="row">
       <h1 class="text-center">YOU MAY ALSO LIKE</h1>
     </div>
-    <p class="" *ngIf="products.length === 0">
+    <p class="" *ngIf="relatedProducts.length === 0">
       No related product has been found!
     </p>
-    <app-product-cards [products]="products"></app-product-cards>
+    <app-product-cards [products]="relatedProducts"></app-product-cards>
   </div>
 </section>

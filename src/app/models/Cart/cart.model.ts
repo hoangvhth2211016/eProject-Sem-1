@@ -1,11 +1,8 @@
-import { CartItem } from "../CartItem/cart-item.model";
+import { CartProduct } from "../CartProduct/cart-product.model";
 
 export class Cart {
-  cartItems!: CartItem[];
-  total!: number;
-
-  // constructor(cartItems: CartItem[], total: number) {
-  //   this.cartItems = cartItems;
-  //   this.total = total;
-  // }
+  cartProducts: CartProduct[] = [];
+  subTotal: number = 0;
+  shippingFee: number = 0;
+  total: number = 0;
 }

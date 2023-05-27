@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Router } from '@angular/router';
 import { ContactService } from 'src/app/services/contact/contact.service';
 
 @Component({
@@ -16,19 +15,20 @@ export class ContactComponent implements OnInit {
   submitted: boolean = false;
 
   constructor(private domSanitizer: DomSanitizer, private formBuilder: FormBuilder, private contactService: ContactService) {
+    this.contactForm = this.formBuilder.group({
+      firstname: ['', [Validators.required, Validators.pattern('^([A-Za-z][a-z]+[ ]*)+$')]],
+      lastname: ['', [Validators.required, Validators.pattern('^([A-Za-z][a-z]+[ ]*)+$')]],
+      title: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      subject: ['', [Validators.required, Validators.minLength(20)]],
+      detail: ['', [Validators.required, Validators.minLength(20)]],
+      acceptTerm: [false, [Validators.requiredTrue]]
+    });
   }
 
   ngOnInit(): void {
     this.safeUrl = this.domSanitizer.bypassSecurityTrustResourceUrl(this.locationUrl);
-    this.contactForm = this.formBuilder.group({
-      firstname: ['', [Validators.required]],
-      lastname: ['', [Validators.required]],
-      title: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      subject: ['', [Validators.required]],
-      detail: ['', [Validators.required]],
-      acceptTerm: [false, [Validators.requiredTrue]]
-    });
+
   }
 
   onSubmit() {

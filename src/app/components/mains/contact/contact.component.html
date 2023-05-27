@@ -1,98 +1,130 @@
 <section class="contact">
-  <div class="container my-5">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="mx-5">
-          <h1 class="mb-3">Contact Us</h1>
-          <p>Our friendly team would love to hear from you!</p>
-          <form novalidate autocomplete="off" (ngSubmit)="onSubmit()" [formGroup]="contactForm">
-            <!-- username input and validate -->
-            <div class="row">
-              <!-- firstname -->
-              <div class="col-6 my-3">
-                <label for="firstname" class="form-label fw-semibold">First Name:</label>
-                <input type="text" class="form-control" id="firstname" placeholder="First Name"
-                  formControlName="firstname"
-                  [ngClass]="{'is-invalid':submitted && contactForm.controls['firstname'].errors}">
-                <div *ngIf="contactForm.controls['firstname'].errors" class="invalid-feedback">
-                  <em *ngIf="contactForm.controls['firstname'].errors['required']">Your First Name is required!</em>
-                </div>
-              </div>
-              <!-- lastname -->
-              <div class="col-6 my-3">
-                <label for="lastname" class="form-label fw-semibold">Last Name:</label>
-                <input type="text" class="form-control" id="lastname" placeholder="Last Name" formControlName="lastname"
-                  [ngClass]="{'is-invalid':submitted && contactForm.controls['lastname'].errors}">
-                <div *ngIf="contactForm.controls['lastname'].errors" class="invalid-feedback">
-                  <em *ngIf="contactForm.controls['lastname'].errors['required']">Your Last Name is required!</em>
-                </div>
-              </div>
-            </div>
-            <!-- Personal title -->
-            <div class="my-3">
-              <label for="title-selector" class="form-label fw-semibold">Title:</label>
-              <select class="form-select w-25" id="title-selector" formControlName="title"
-                [ngClass]="{'is-invalid':submitted && contactForm.controls['title'].errors}">
-                <option value="Mr.">Mr.</option>
-                <option value="Mrs.">Mrs.</option>
-                <option value="Miss">Miss</option>
-                <option value="Mx.">Mx.</option>
-              </select>
-              <div *ngIf="contactForm.controls['title'].errors" class="invalid-feedback">
-                <em *ngIf="contactForm.controls['title'].errors['required']">Please give us your Personal Title!</em>
-              </div>
-            </div>
-            <!-- email input and validate -->
-            <div class="my-3">
-              <label for="email" class="form-label fw-semibold">E-Mail:</label>
-              <input type="email" class="form-control" id="email" placeholder="user@example.com" formControlName="email"
-                [ngClass]="{'is-invalid':submitted && contactForm.controls['email'].errors}">
-              <div *ngIf="contactForm.controls['email'].errors" class="invalid-feedback">
-                <em *ngIf="contactForm.controls['email'].errors['required']">Email is required!</em>
-                <em *ngIf="contactForm.controls['email'].errors['email']">The Given Email is invalid!</em>
-              </div>
-            </div>
-            <!-- title input and validate -->
-            <div class="my-3">
-              <label for="subject" class="form-label fw-semibold">Subject:</label>
-              <input type="text" class="form-control" id="subject" placeholder="Subject" formControlName="subject"
-                [ngClass]="{'is-invalid':submitted && contactForm.controls['subject'].errors}">
-              <div *ngIf="contactForm.controls['subject'].errors" class="invalid-feedback">
-                <em *ngIf="contactForm.controls['subject'].errors['required']">Subject is required!</em>
-              </div>
-            </div>
-            <!-- detail input and validate -->
-            <div class="my-3">
-              <label for="detail" class="form-label fw-semibold">Detail:</label>
-              <textarea class="form-control" id="detail" cols="30" rows="10"
-                placeholder="Please leave your message here!" formControlName="detail"
-                [ngClass]="{'is-invalid':submitted && contactForm.controls['detail'].errors}"></textarea>
-              <div *ngIf="contactForm.controls['detail'].errors" class="invalid-feedback">
-                <em *ngIf="contactForm.controls['detail'].errors['required']">Detail is required!</em>
-              </div>
-            </div>
-            <!-- term check -->
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="acceptTerm" formControlName="acceptTerm"
-                [ngClass]="{'is-invalid':submitted && contactForm.controls['acceptTerm'].errors}">
-              <label class="form-check-label" for="acceptTerm">
-                I accept the Terms of Service
-              </label>
-              <em *ngIf="contactForm.controls['acceptTerm'].errors" class="invalid-feedback">Please accept our
-                terms for the service!</em>
-            </div>
-            <!-- submit button -->
-            <div class="my-3 text-center">
-              <button class="btn btn-dark w-100" type="submit">Send Message</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      <!-- map -->
-      <div class="col-md-6">
-        <iframe class="border-none" [src]="safeUrl" width="100%" height="100%" allowfullscreen loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
+  <div class="position-relative shadow-sm">
+    <img class="w-100" src="assets/images/contact/contact-1.jpg" alt="">
+    <div
+      class="position-absolute top-0 start-0 text-white w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center">
+      <h1 class="mb-3 text-white">Contact Us</h1>
+      <p class="text-white">Our friendly team would love to hear from you!</p>
     </div>
   </div>
+  <div class="container py-5">
+    <div class="row shadow-sm">
+      <div class="col-12 col-md-12 col-lg-6 p-4">
+        <div class="pb-4">
+          <h1 class="pb-4">Contact Information:</h1>
+          <p class="d-flex">
+            <i class="bi bi-geo-alt-fill me-3"></i>
+            <span>
+              8A Ton That Thuyet, My Đinh, Nam Tu Liem, Ha Noi, Viet
+              Nam
+            </span>
+          </p>
+          <p class="d-flex">
+            <i class="bi bi-telephone-fill me-3"></i>
+            <a class="text-dark" href="tel:+84123456789">(+84) 1234 5678 9</a>
+          </p>
+          <p class="d-flex">
+            <i class="bi bi-envelope-open-fill me-3"></i>
+            <a class="text-dark" href="mailto: customerservice@crystal.store">customerservice@crystal.store</a>
+          </p>
+          <p><span class="fw-semibold">Mon. - Fri.:</span> 09:00 - 20:00</p>
+          <p><span class="fw-semibold">Sat.:</span> 09:00 - 19:00</p>
+        </div>
+        <div>
+          <iframe class="border-none" [src]="safeUrl" width="100%" height="450px" allowfullscreen loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <!-- contact form -->
+      <div class="col-12 col-md-12 col-lg-6 border border-light">
+        <form class="p-4" novalidate autocomplete="off" (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+          <!-- username input and validate -->
+          <div class="row">
+            <!-- firstname -->
+            <div class="col-6 my-3">
+              <label for="firstname" class="form-label fw-semibold">First Name:</label>
+              <input type="text" class="form-control" id="firstname" placeholder="First Name"
+                formControlName="firstname"
+                [ngClass]="{'is-invalid':submitted && contactForm.controls['firstname'].errors}">
+              <div *ngIf="contactForm.controls['firstname'].errors" class="invalid-feedback">
+                <em *ngIf="contactForm.controls['firstname'].errors['required']">Your First Name is required!</em>
+                <em *ngIf="contactForm.controls['firstname'].errors['pattern']">Please enter a valid Name!</em>
+              </div>
+            </div>
+            <!-- lastname -->
+            <div class="col-6 my-3">
+              <label for="lastname" class="form-label fw-semibold">Last Name:</label>
+              <input type="text" class="form-control" id="lastname" placeholder="Last Name" formControlName="lastname"
+                [ngClass]="{'is-invalid':submitted && contactForm.controls['lastname'].errors}">
+              <div *ngIf="contactForm.controls['lastname'].errors" class="invalid-feedback">
+                <em *ngIf="contactForm.controls['lastname'].errors['required']">Your Last Name is required!</em>
+                <em *ngIf="contactForm.controls['lastname'].errors['pattern']">Please enter a valid Name!</em>
+              </div>
+            </div>
+          </div>
+          <!-- Personal title -->
+          <div class="my-3">
+            <label for="title-selector" class="form-label fw-semibold">Title:</label>
+            <select class="form-select w-25" id="title-selector" formControlName="title"
+              [ngClass]="{'is-invalid':submitted && contactForm.controls['title'].errors}">
+              <option value="Mr.">Mr.</option>
+              <option value="Mrs.">Mrs.</option>
+              <option value="Miss">Miss</option>
+              <option value="Mx.">Mx.</option>
+            </select>
+            <div *ngIf="contactForm.controls['title'].errors" class="invalid-feedback">
+              <em *ngIf="contactForm.controls['title'].errors['required']">Please give us your Personal Title!</em>
+            </div>
+          </div>
+          <!-- email input and validate -->
+          <div class="my-3">
+            <label for="email" class="form-label fw-semibold">E-Mail:</label>
+            <input type="email" class="form-control" id="email" placeholder="user@example.com" formControlName="email"
+              [ngClass]="{'is-invalid':submitted && contactForm.controls['email'].errors}">
+            <div *ngIf="contactForm.controls['email'].errors" class="invalid-feedback">
+              <em *ngIf="contactForm.controls['email'].errors['required']">Email is required!</em>
+              <em *ngIf="contactForm.controls['email'].errors['email']">The Given Email is invalid!</em>
+            </div>
+          </div>
+          <!-- subject input and validate -->
+          <div class="my-3">
+            <label for="subject" class="form-label fw-semibold">Subject:</label>
+            <input type="text" class="form-control" id="subject" placeholder="Subject" formControlName="subject"
+              [ngClass]="{'is-invalid':submitted && contactForm.controls['subject'].errors}">
+            <div *ngIf="contactForm.controls['subject'].errors" class="invalid-feedback">
+              <em *ngIf="contactForm.controls['subject'].errors['required']">Subject is required!</em>
+              <em *ngIf="contactForm.controls['subject'].errors['minlength']">Subject is too short!</em>
+            </div>
+          </div>
+          <!-- detail input and validate -->
+          <div class="my-3">
+            <label for="detail" class="form-label fw-semibold">Detail:</label>
+            <textarea class="form-control" id="detail" cols="30" rows="10" placeholder="Please leave your message here!"
+              formControlName="detail"
+              [ngClass]="{'is-invalid':submitted && contactForm.controls['detail'].errors}"></textarea>
+            <div *ngIf="contactForm.controls['detail'].errors" class="invalid-feedback">
+              <em *ngIf="contactForm.controls['detail'].errors['required']">Message Content is required!</em>
+              <em *ngIf="contactForm.controls['detail'].errors['minlength']">The message is too short!</em>
+            </div>
+          </div>
+          <!-- term check -->
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="acceptTerm" formControlName="acceptTerm"
+              [ngClass]="{'is-invalid':submitted && contactForm.controls['acceptTerm'].errors}">
+            <label class="form-check-label" for="acceptTerm">
+              I accept the Terms of Service
+            </label>
+            <em *ngIf="contactForm.controls['acceptTerm'].errors" class="invalid-feedback">Please accept our
+              terms for the service!</em>
+          </div>
+          <!-- submit button -->
+          <div class="my-3 text-center">
+            <button class="btn btn-dark" type="submit">Send Message</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
 </section>

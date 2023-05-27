@@ -25,3 +25,8 @@ header .header-link::before {
 header .header-link:hover::before {
   width: 110%;
 }
+
+header .notification {
+  font-size: x-small;
+  padding: 2px 7px;
+}

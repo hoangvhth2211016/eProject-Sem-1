@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { saveAs } from 'file-saver';
+import * as Doc from 'docx';
+
 import { Category } from 'src/app/models/Category/category.model';
 import { Product } from 'src/app/models/Product/product.model';
 import { CartService } from 'src/app/services/cart/cart.service';
 import { ComparisonService } from 'src/app/services/compare/comparison.service';
+import { DocService } from 'src/app/services/document/doc.service';
 import { ProductService } from 'src/app/services/products/product.service';
+
 
 @Component({
   selector: 'app-detail',
@@ -15,11 +20,12 @@ import { ProductService } from 'src/app/services/products/product.service';
 export class DetailComponent implements OnInit {
   product!: Product;
   category!: Category[];
-  products!: Product[];
+  relatedProducts!: Product[];
   productForm: FormGroup = this.formBuilder.group({
     quantity: [1, [Validators.required, Validators.pattern("^[0-9]*$")]]
   });
-
+  productImage!: ArrayBuffer;
+  logo!: ArrayBuffer;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +33,9 @@ export class DetailComponent implements OnInit {
     private comparisonService: ComparisonService,
     private cartService: CartService,
     private formBuilder: FormBuilder,
-    private router: Router) {
+    private router: Router,
+    private docService: DocService
+  ) {
 
   }
 
@@ -35,12 +43,19 @@ export class DetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       if (params['id']) {
-        this.product = this.productService.getProductById(params['id']);
+        this.productService.getProductById(params['id']).subscribe(product => {
+          this.product = product;
+          this.productService.getRelatedProduct(product).subscribe(products => {
+            this.relatedProducts = products;
+          });
+          this.docService.getImage(this.product.image).subscribe(buffer => {
+            this.productImage = buffer;
+          });
+          this.docService.getImage('/assets/images/logo-image.jpg').subscribe(buffer => {
+            this.logo = buffer;
+          });
+        })
       }
-      this.products = this.productService.getRelatedProduct(
-        this.product,
-        this.product.categories
-      );
     });
   }
 
@@ -57,5 +72,15 @@ export class DetailComponent implements OnInit {
       this.cartService.addToCart(this.product, this.productForm.value.quantity);
       this.router.navigateByUrl('/cart');
     }
+  }
+
+
+  // download document
+  downloadDoc() {
+    const document = this.docService.createDocument(this.productImage, this.logo, this.product);
+    Doc.Packer.toBlob(document).then(blob => {
+      let name = this.product.name.trim();
+      saveAs(blob, `${name}.docx`);
+    })
   }
 }

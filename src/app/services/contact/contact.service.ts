@@ -1,23 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessagesService } from '../messages/messages.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
-  message!: string;
-  constructor(private router: Router) { }
-
-  // get message
-  getMessage(): string {
-    return this.message;
-  }
-
-  // set message
-  setMessage(message: string) {
-    this.message = message;
-  }
+  constructor(private router: Router, private messagesService: MessagesService) { }
 
   // submit form
   submitForm(form: FormGroup) {
@@ -25,7 +15,7 @@ export class ContactService {
       console.log("error");
       return;
     }
-    this.setMessage("Your message has been submitted successfully");
+    this.messagesService.setMessage("Congratulation!", "Your message has been submitted successfully.");
     this.router.navigateByUrl('/message');
   }
 }

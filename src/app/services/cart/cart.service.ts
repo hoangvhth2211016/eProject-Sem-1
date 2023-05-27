@@ -1,15 +1,20 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Cart } from 'src/app/models/Cart/cart.model';
-import { CartItem } from 'src/app/models/CartItem/cart-item.model';
+import { CartProduct } from 'src/app/models/CartProduct/cart-product.model';
 import { Product } from 'src/app/models/Product/product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
-  cart!: Cart;
+  cart: Cart;
+  cartSubject: BehaviorSubject<Cart>;
 
-  constructor() { }
+  constructor() {
+    this.cart = this.getCart();
+    this.cartSubject = new BehaviorSubject(this.cart);
+  }
 
   // get cart
   getCart(): Cart {
@@ -19,38 +24,53 @@ export class CartService {
 
   // set cart
   setCart() {
-    this.cart.total = this.cart.cartItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
+    if (this.cart.cartProducts.length === 0) {
+      this.cart = new Cart();
+    } else {
+      this.cart.subTotal = this.cart.cartProducts.reduce((total, item) => total + item.product.price * item.quantity, 0);
+      this.cart.shippingFee = (this.cart.subTotal > 100) ? 0 : 6;
+      this.cart.total = this.cart.subTotal + this.cart.shippingFee;
+    }
     const cartJson = JSON.stringify(this.cart);
-    localStorage.setItem('cart', cartJson);
+    localStorage.setItem('Cart', cartJson);
+    this.cartSubject.next(this.cart);
+  }
+
+  // observe cart
+  observeCart(): Observable<Cart> {
+    return this.cartSubject.asObservable();
   }
 
   // add an item to cart
   addToCart(product: Product, quantity: number) {
-    let currentItem = this.cart.cartItems.find(item => item.product.id === product.id);
-    if (currentItem) {
-      currentItem.quantity += quantity;
+    const currentProduct = this.cart.cartProducts.find(item => item.product.id === product.id);
+    if (currentProduct) {
+      currentProduct.quantity += quantity;
     } else {
-      this.cart.cartItems.push(new CartItem(product, quantity));
+      this.cart.cartProducts.push(new CartProduct(product, quantity));
     }
     this.setCart();
   }
 
   // remove item from cart
-  removeFromCart(id: string) {
-    this.cart.cartItems = this.cart.cartItems.filter(item => {
-      item.product.id != id;
-    });
+  removeFromCart(index: number) {
+    this.cart.cartProducts.splice(index, 1);
     this.setCart();
   }
 
   // change quantity
-  changeQuantity(id: string, quantity: number) {
-    let cartItem = this.cart.cartItems.find(item => {
-      item.product.id === id;
+  updateQuantity(id: string, quantity: number) {
+    this.cart.cartProducts.forEach(item => {
+      if (item.product.id === id) {
+        item.quantity = quantity;
+      }
     })
-    if (!cartItem) return;
-    cartItem.quantity = quantity;
     this.setCart();
   }
 
+  // clear cart
+  clearCart() {
+    this.cart = new Cart();
+    this.setCart();
+  }
 }

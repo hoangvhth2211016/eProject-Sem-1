@@ -1,0 +1,84 @@
+<section class="hero">
+  <div class="container-fluid p-0 shadow-sm position-relative">
+    <img class="w-100" src="assets/images/heroes/hero-1.png" alt="hero">
+    <div
+      class="position-absolute top-0 start-0 text-white w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center">
+      <h1 class="text-uppercase text-white">crystal</h1>
+      <p class="fs-3 mb-4">brings joy to your heart and sparkle your life</p>
+      <button class="bg-transparent text-white text-uppercase border border-light py-2 px-3"
+        routerLink="/categories/all-products">all products</button>
+    </div>
+  </div>
+</section>
+
+<section class="new-arrival my-5 py-3">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="text-uppercase">new arrivals</h1>
+      <div class=" my-4">
+        <button class="bg-white text-uppercase border border-dark py-2 px-4" routerLink="/categories/new-arrivals">shop
+          all new products</button>
+      </div>
+    </div>
+    <hr>
+    <app-product-cards [products]="newProducts"></app-product-cards>
+  </div>
+</section>
+
+<section class="categories my-5 py-3">
+  <div class="container border">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-6 bg-color text-center pt-3">
+        <h2 class="text-uppercase">our crystals</h2>
+        <p>Navigate your way around and discover the pieces of your dreams</p>
+        <button class="bg-transparent text-uppercase d-block border border-dark w-50 col-4 offset-3 py-2 my-3"
+          *ngFor="let cat of categories" routerLink="/categories/{{cat.name}}">{{cat.name}}</button>
+      </div>
+      <div class="col-12 col-md-12 col-lg-6 p-0">
+        <img class="img-fluid" src="assets/images/about-us/beginnerscrystlas.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sale my-5 py-3">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1 class="text-uppercase">special offers</h1>
+      <div class=" my-4">
+        <button class="bg-white text-uppercase border border-dark py-2 px-3"
+          routerLink="/categories/special-offers">shop all offer products</button>
+      </div>
+    </div>
+    <hr>
+    <app-product-cards [products]="offerProducts"></app-product-cards>
+  </div>
+</section>
+
+<section class="store-information my-5 bg-color pt-3 pb-5 border">
+  <div class="container">
+    <div class="text-center my-4">
+      <h1 class="text-uppercase">crystal</h1>
+      <p class="fs-5">your satisfaction is our happiness</p>
+    </div>
+    <div class="position-relative">
+      <img class="img-fluid" src="assets/images/homes/office-1.jpg" alt="office">
+      <div
+        class=" position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center">
+        <div class="information-field">
+          <p class="fs-3 m-0 text-uppercase">world-class</p>
+          <h3 class="text-uppercase">customer service</h3>
+          <p>Crystal&#39;s team would love to help you to choose the product that&#39;s right for you.</p>
+          <p><i class="bi bi-geo-alt-fill me-2"></i>8A Ton That Thuyet, My Đinh, Nam Tu Liem, Ha Noi, Viet Nam</p>
+          <div class="d-flex flex-column mb-4">
+            <span class="fw-semibold text-capitalize">opening hours</span>
+            <span>Mon. - Fri.: 09:00 - 20:00</span>
+            <span>Sat.: 09:00 - 19:00</span>
+          </div>
+          <button class="bg-transparent text-uppercase border border-dark py-2 px-3" routerLink="/contact">contact
+            us</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

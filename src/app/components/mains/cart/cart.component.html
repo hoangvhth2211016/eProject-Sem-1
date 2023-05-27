@@ -1,8 +1,219 @@
-<section class="cart">
-  <div class="container">
-    <p *ngFor="let item of cart.cartItems">
-      {{item.product.name}}
-    </p>
-    <h1>{{cart.total}}</h1>
+<div class="container my-5">
+  <div class="row">
+    <!-- user infos -->
+    <div class="col-md-12 col-lg-7 order-last order-lg-first user-info">
+      <form class="p-4" novalidate autocomplete="off" (ngSubmit)="checkout()" [formGroup]="userForm">
+        <h2>Address</h2>
+        <!-- username input and validate -->
+        <div class="row">
+          <!-- firstname -->
+          <div class="col-6 my-3">
+            <label for="firstname" class="form-label fw-semibold">First Name:</label>
+            <input type="text" class="form-control" id="firstname" placeholder="First Name" formControlName="firstname"
+              [ngClass]="{'is-invalid':submitted && userForm.controls['firstname'].errors}">
+            <div *ngIf="userForm.controls['firstname'].errors" class="invalid-feedback">
+              <em *ngIf="userForm.controls['firstname'].errors['required']">Your First Name is required!</em>
+              <em *ngIf="userForm.controls['firstname'].errors['pattern']">Please enter a valid Name!</em>
+            </div>
+          </div>
+          <!-- lastname -->
+          <div class="col-6 my-3">
+            <label for="lastname" class="form-label fw-semibold">Last Name:</label>
+            <input type="text" class="form-control" id="lastname" placeholder="Last Name" formControlName="lastname"
+              [ngClass]="{'is-invalid':submitted && userForm.controls['lastname'].errors}">
+            <div *ngIf="userForm.controls['lastname'].errors" class="invalid-feedback">
+              <em *ngIf="userForm.controls['lastname'].errors['required']">Your Last Name is required!</em>
+              <em *ngIf="userForm.controls['lastname'].errors['pattern']">Please enter a valid Name!</em>
+            </div>
+          </div>
+        </div>
+        <!-- phone number input and validate -->
+        <div class="my-3">
+          <label for="tel" class="form-label fw-semibold">Telephone:</label>
+          <input type="text" class="form-control" id="tel" placeholder="Telephone" formControlName="telephone"
+            [ngClass]="{'is-invalid':submitted && userForm.controls['telephone'].errors}">
+          <div *ngIf="userForm.controls['telephone'].errors" class="invalid-feedback">
+            <em *ngIf="userForm.controls['telephone'].errors['required']">Your Telephone Number is required!</em>
+            <em *ngIf="userForm.controls['telephone'].errors['pattern']">Please enter a valid Phone Number!</em>
+          </div>
+        </div>
+        <!-- email input and validate -->
+        <div class="my-3">
+          <label for="email" class="form-label fw-semibold">E-Mail:</label>
+          <input type="email" class="form-control" id="email" placeholder="user@example.com" formControlName="email"
+            [ngClass]="{'is-invalid':submitted && userForm.controls['email'].errors}">
+          <div *ngIf="userForm.controls['email'].errors" class="invalid-feedback">
+            <em *ngIf="userForm.controls['email'].errors['required']">Email is required!</em>
+            <em *ngIf="userForm.controls['email'].errors['email']">The Given Email is invalid!</em>
+          </div>
+        </div>
+        <!-- address input and validate -->
+        <div class="my-3">
+          <label for="address" class="form-label fw-semibold">Address:</label>
+          <input type="text" class="form-control" id="address" placeholder="Address" formControlName="address"
+            [ngClass]="{'is-invalid':submitted && userForm.controls['address'].errors}">
+          <div *ngIf="userForm.controls['address'].errors" class="invalid-feedback">
+            <em *ngIf="userForm.controls['address'].errors['required']">Your Address is required!</em>
+            <em *ngIf="userForm.controls['address'].errors['minlength']">The given Address is too short!</em>
+          </div>
+        </div>
+        <!-- city, country, postcode input and validate -->
+        <div class="row my-3">
+          <!-- city -->
+          <div class="col-4">
+            <label for="city" class="form-label fw-semibold">City:</label>
+            <input type="text" class="form-control" id="city" placeholder="City" formControlName="city"
+              [ngClass]="{'is-invalid':submitted && userForm.controls['city'].errors}">
+            <div *ngIf="userForm.controls['city'].errors" class="invalid-feedback">
+              <em *ngIf="userForm.controls['city'].errors['required']">Your City is required!</em>
+            </div>
+          </div>
+          <!-- country -->
+          <div class="col-4">
+            <label for="country-selector" class="form-label fw-semibold">Country:</label>
+            <select class="form-select" id="country-selector" formControlName="country"
+              [ngClass]="{'is-invalid':submitted && userForm.controls['country'].errors}">
+              <option value="vietnam">Vietnam</option>
+              <option value="china">China</option>
+              <option value="laos">Laos</option>
+              <option value="cambodia">Cambodia</option>
+              <option value="indonesia">Indonesia</option>
+              <option value="singapore">Singapore</option>
+            </select>
+            <div *ngIf="userForm.controls['country'].errors" class="invalid-feedback">
+              <em *ngIf="userForm.controls['country'].errors['required']">Please select your Country!</em>
+            </div>
+          </div>
+          <!-- postcode -->
+          <div class="col-4">
+            <label for="postcode" class="form-label fw-semibold">Postcode:</label>
+            <input type="text" class="form-control" id="postcode" placeholder="postcode" formControlName="postcode"
+              [ngClass]="{'is-invalid':submitted && userForm.controls['postcode'].errors}">
+            <div *ngIf="userForm.controls['postcode'].errors" class="invalid-feedback">
+              <em *ngIf="userForm.controls['postcode'].errors['required']">Your Postcode is required!</em>
+              <em *ngIf="userForm.controls['postcode'].errors['pattern']">Please enter a valid Postcode!</em>
+            </div>
+          </div>
+        </div>
+        <!-- payment -->
+        <h2 class="pt-5">Payment</h2>
+        <!-- cardholder input and validate -->
+        <div class="my-3">
+          <label for="cardholder" class="form-label fw-semibold">Cardholder:</label>
+          <input type="text" class="form-control" id="cardholder" placeholder="Cardholder" formControlName="cardholder"
+            [ngClass]="{'is-invalid':submitted && userForm.controls['cardholder'].errors}">
+          <div *ngIf="userForm.controls['cardholder'].errors" class="invalid-feedback">
+            <em *ngIf="userForm.controls['cardholder'].errors['required']">Cardholder is required!</em>
+            <em *ngIf="userForm.controls['cardholder'].errors['pattern']">Please enter a valid Name!</em>
+          </div>
+        </div>
+        <!-- cardnumber input and validate -->
+        <div class="my-3">
+          <label for="cardnumber" class="form-label fw-semibold">Cardnumber:</label>
+          <input type="text" class="form-control" id="cardnumber" placeholder="**** **** **** ****"
+            formControlName="cardnumber" [ngClass]="{'is-invalid':submitted && userForm.controls['cardnumber'].errors}">
+          <div *ngIf="userForm.controls['cardnumber'].errors" class="invalid-feedback">
+            <em *ngIf="userForm.controls['cardnumber'].errors['required']">Cardnumber is required!</em>
+            <em *ngIf="userForm.controls['cardnumber'].errors['pattern']">Card Number pattern is not correct!</em>
+
+          </div>
+        </div>
+        <!-- month, year and cvv input and validate -->
+        <div class="row my-3">
+          <!-- month -->
+          <div class="col-4">
+            <label for="month" class="form-label fw-semibold">Mo.:</label>
+            <input type="text" class="form-control" id="month" placeholder="MM" formControlName="month"
+              [ngClass]="{'is-invalid':submitted && userForm.controls['month'].errors}">
+            <div *ngIf="userForm.controls['month'].errors" class="invalid-feedback">
+              <em *ngIf="userForm.controls['month'].errors['required']">Month is required!</em>
+              <em *ngIf="userForm.controls['month'].errors['pattern']">Please enter a valid Month!</em>
+            </div>
+          </div>
+          <!-- year -->
+          <div class="col-4">
+            <label for="year" class="form-label fw-semibold">Year:</label>
+            <input type="text" class="form-control" id="year" placeholder="YYYY" formControlName="year"
+              [ngClass]="{'is-invalid':submitted && userForm.controls['year'].errors}">
+            <div *ngIf="userForm.controls['year'].errors" class="invalid-feedback">
+              <em *ngIf="userForm.controls['year'].errors['required']">Year is required!</em>
+              <em *ngIf="userForm.controls['year'].errors['pattern']">Please enter a valid Year!</em>
+            </div>
+          </div>
+          <!-- cvv -->
+          <div class="col-4">
+            <label for="cvv" class="form-label fw-semibold">CVV:</label>
+            <input type="password" class="form-control" id="cvv" placeholder="CVV" formControlName="cvv"
+              [ngClass]="{'is-invalid':submitted && userForm.controls['cvv'].errors}">
+            <div *ngIf="userForm.controls['cvv'].errors" class="invalid-feedback">
+              <em *ngIf="userForm.controls['cvv'].errors['required']">CVV is required!</em>
+              <em *ngIf="userForm.controls['cvv'].errors['pattern']">CVV pattern is not correct!</em>
+            </div>
+          </div>
+          <em class="text-danger" *ngIf="submitted && userForm.hasError('expired')">Your credit card is expired!</em>
+        </div>
+        <div class="my-2 text-end">
+          <button class="btn btn-dark">check out</button>
+        </div>
+      </form>
+    </div>
+    <!-- end of user info -->
+    <!-- view cart -->
+    <div class="col-md-12 col-lg-5 order-first order-lg-last cart p-0">
+      <div class="bg-color p-5 shadow-sm">
+        <h2>My Cart</h2>
+        <button class="bg-white text-uppercase border border-dark py-2 px-4 my-3"
+          routerLink="/categories/all-products">continue
+          shopping</button>
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th class="col-2">Product</th>
+              <th class="col-5"></th>
+              <th class="col-3">Price</th>
+              <th class="col-2">Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of cart.cartProducts; index as i">
+              <td>
+                <img class="img-thumbnail img-fluid" [src]="item.product.image" alt="">
+              </td>
+              <td>
+                <a class="fw-semibold text-dark" routerLink="/products/{{item.product.id}}">{{item.product.name}}</a>
+                <div class="my-2">
+                  <span class="text-muted" *ngFor="let cat of item.product.categories">{{cat.name}} </span>
+                </div>
+                <span class="button" (click)="removeProduct(i)"><i class="bi bi-trash3-fill fs-4"></i></span>
+              </td>
+              <td>
+                {{item.product.price | currency}}
+              </td>
+              <td>
+                <input class="form-control qty-input" #quantity type="number" min="1" step="1" [value]="item.quantity"
+                  (change)="changeQuantity(item.product.id, quantity.value)" (input)="validateQuantityInput()">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-12 col-md-6 offset-md-6">
+            <div class="d-flex justify-content-between border-bottom mt-3">
+              <p class="fw-semibold">Subtotal:</p>
+              <p>{{cart.subTotal | currency}}</p>
+            </div>
+            <div class="d-flex justify-content-between border-bottom mt-3">
+              <p class="fw-semibold">Shipping Fees:</p>
+              <p>{{cart.shippingFee | currency}}</p>
+            </div>
+            <div class="d-flex justify-content-between mt-3">
+              <p class="fw-semibold">Total:</p>
+              <h4>{{cart.total | currency}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of view cart -->
   </div>
-</section>
+</div>

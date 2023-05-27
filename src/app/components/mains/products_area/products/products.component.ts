@@ -1,58 +1,55 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Category } from 'src/app/models/Category/category.model';
 import { Product } from 'src/app/models/Product/product.model';
 import { ProductService } from 'src/app/services/products/product.service';
-import { Category } from 'src/app/models/Category/category.model';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  products!: Product[];
+  products: Product[] = [];
   categories!: Category[];
   someProducts: Product[] = [];
 
-  constructor(private activateRoute: ActivatedRoute, private productService: ProductService) {
-
-  }
+  constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.categories = this.productService.getProductsCategory();
-    for (let i = 0; i < 3; i++) {
-      this.someProducts.push(this.productService.getProducts()[i]);
-    }
-    this.activateRoute.params.subscribe((params) => {
+    this.productService.getCategories().subscribe(categories => {
+      this.categories = categories;
+    });
+    this.productService.getProducts().subscribe(products => {
+      for (let i = 0; i < 3; i++) {
+        this.someProducts.push(products[i]);
+      }
+    })
+    this.route.params.subscribe((params) => {
       const name: string = params['name'];
       if (!name) {
-        this.products = this.productService.getProducts();
+        this.productService.getProducts().subscribe(products => {
+          this.products = products
+        });
       }
       if (name === 'all-products') {
-        this.products = this.productService.getProducts();
+        this.productService.getProducts().subscribe(products => {
+          this.products = products
+        });
       } else if (name === 'special-offers') {
-        this.products = this.productService.getOffer();
+        this.productService.getOffer().subscribe(products => {
+          this.products = products
+        });
       } else if (name === 'new-arrivals') {
-        this.products = this.productService.getNew();
+        this.productService.getNew().subscribe(products => {
+          this.products = products
+        });
       } else {
-        this.products = this.productService.sortByCategory(
-          this.productService.getProducts(),
-          name
-        );
+        this.productService.getProductsByCategory(name).subscribe(products => {
+          this.products = products
+        });
       };
     });
-  }
-
-  // activate the sorting products function by category
-  sortProducts(name: string) {
-    this.products = this.productService.sortByCategory(
-      this.products,
-      name
-    );
-  }
-
-  getAll() {
-    this.products = this.productService.getProducts();
   }
 
 }
