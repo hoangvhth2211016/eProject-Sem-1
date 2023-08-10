@@ -4,14 +4,15 @@ import { HttpClient } from '@angular/common/http';
 
 import { Category } from 'src/app/models/Category/category.model';
 import { Product } from 'src/app/models/Product/product.model';
+import { Message } from 'src/app/models/Message/message.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  products: Product[] = [];
-  categories: Category[] = [];
+  products!: Product[];
+  categories!: Category[];
   productsUrl: string = 'assets/datas/products.json';
   categoriesUrl: string = 'assets/datas/categories.json';
 
@@ -28,20 +29,20 @@ export class ProductService {
   }
 
   // get a single product by its ID
-  getProductById(id: string): Observable<Product> {
-    return this.httpClient.get<Product[]>(this.productsUrl).pipe(map(products => {
-      for (let i = 0; i < products.length; i++) {
-        if (products[i].id === id) {
-          return products[i];
-        }
+  getProductById(id: string): Observable<Product | undefined> {
+    return this.getProducts().pipe(map(products => {
+      const product = products.find(p => p.id === id);
+      if (product) {
+        return product;
+      } else {
+        return;
       }
-      return products[products.length];
     }))
   }
 
   // get all the products that related to the given product
   getRelatedProduct(product: Product): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.productsUrl).pipe(map(products => {
+    return this.getProducts().pipe(map(products => {
       let arr: Product[] = [];
       products.forEach((p) => {
         let check = 0;
@@ -61,8 +62,9 @@ export class ProductService {
 
   }
 
+  // get products by category
   getProductsByCategory(name: string): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.productsUrl).pipe(map(products => {
+    return this.getProducts().pipe(map(products => {
       let arr: Product[] = [];
       products.forEach(p => {
         p.categories.forEach(cat => {
@@ -77,14 +79,14 @@ export class ProductService {
 
   // get all new products
   getNew(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.productsUrl).pipe(map(products => {
+    return this.getProducts().pipe(map(products => {
       return products.filter(product => product.newArrival);
     }));
   }
 
   // get all offer products
   getOffer(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(this.productsUrl).pipe(map(products => {
+    return this.getProducts().pipe(map(products => {
       return products.filter(product => product.offer);
     }));
   }

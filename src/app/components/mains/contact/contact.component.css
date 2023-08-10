@@ -1,0 +1,7 @@
+.contact .banner-content {
+  height: 20rem;
+  background-image: url('../../../../assets/images/contact/citrine.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}

@@ -1,5 +1,5 @@
 <section class="detail">
-  <div class="container my-5" *ngIf="product">
+  <div class="container my-5" *ngIf="product; else showMessage">
     <div class="row">
       <div class="col-12 col-md-12 col-lg-6">
         <img class="img-fluid" alt="{{ product.name }} " src="{{ product.image }}" />
@@ -8,7 +8,7 @@
         <span class="ms">
           <a routerLink="">Home</a>
           /
-          <a routerLink="/categories/all-products">Product</a>
+          <a routerLink="/categories/all-products">Products</a>
           /
           <span>{{ product.name }}</span>
         </span>
@@ -38,33 +38,37 @@
                   <em *ngIf="productForm.controls['quantity'].errors['pattern']">Please input a valid quantity!</em>
                 </div>
               </div>
-              <div class="my-4">
-                <button class="btn btn-outline-danger px-3 py-2 text-uppercase">
-                  Add To Cart
-                </button>
-                <a (click)="addToCompareList(product)" class="text-capitalize text-dark mx-5 text-decoration-none">
-                  <i class="bi bi-clipboard-plus fs-4 me-2 align-middle"></i>
-                  comparison</a>
-                <a (click)="downloadDoc()" class="text-capitalize text-dark text-decoration-none">
-                  <i class="bi bi-filetype-docx fs-4 me-2 align-middle"></i>
-                  document</a>
+              <div class="my-4 row gy-1">
+                <div class="col-12 col-md-4">
+                  <button class="btn btn-outline-danger px-3 py-2 text-uppercase">
+                    Add To Cart
+                  </button>
+                </div>
+                <div class="col-12 col-md-8">
+                  <a (click)="addToCompareList(product)" class="text-capitalize text-dark me-5 text-decoration-none">
+                    <i class="bi bi-clipboard-plus fs-4 me-2 align-middle"></i>
+                    comparison</a>
+                  <a (click)="downloadDoc()" class="text-capitalize text-dark text-decoration-none">
+                    <i class="bi bi-filetype-docx fs-4 me-2 align-middle"></i>
+                    document</a>
+                </div>
               </div>
             </form>
             <div class="d-flex my-3">
               <h3 class="me-3">Share</h3>
               <i class="bi bi-share fs-4 py-auto"></i>
             </div>
-            <div class="d-flex justify-content-center align-items-center my-4">
-              <div class="mx-3">
+            <div class="row text-center">
+              <div class="col-6 col-md-3">
                 <span><i class="bi bi-facebook fs-5 me-2 align-middle"></i>Facebook</span>
               </div>
-              <div class="mx-3">
+              <div class="col-6 col-md-3">
                 <span><i class="bi bi-instagram fs-5 me-2 align-middle"></i>Instagram</span>
               </div>
-              <div class="mx-3">
+              <div class="col-6 col-md-3">
                 <span><i class="bi bi-twitter fs-5 me-2 align-middle"></i>Twitter</span>
               </div>
-              <div class="mx-3">
+              <div class="col-6 col-md-3">
                 <span><i class="bi bi-pinterest fs-5 me-2 align-middle"></i>Pinterest</span>
               </div>
             </div>
@@ -72,15 +76,21 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="container my-5">
-    <div class="row">
-      <h1 class="text-center">YOU MAY ALSO LIKE</h1>
+    <div class="my-5">
+      <div class="row">
+        <h1 class="text-center">YOU MAY ALSO LIKE</h1>
+      </div>
+      <p class="" *ngIf="relatedProducts && relatedProducts.length === 0">
+        No related product has been found!
+      </p>
+      <app-product-cards [products]="relatedProducts"></app-product-cards>
     </div>
-    <p class="" *ngIf="relatedProducts.length === 0">
-      No related product has been found!
-    </p>
-    <app-product-cards [products]="relatedProducts"></app-product-cards>
   </div>
+  <ng-template #showMessage message='message'>
+    <div class="container my-5">
+      <h1>{{message.headline}}</h1>
+      <p>{{message.detail}}</p>
+      <p>Go back to our <a routerLink="/categories/all-products">products page</a>.</p>
+    </div>
+  </ng-template>
 </section>

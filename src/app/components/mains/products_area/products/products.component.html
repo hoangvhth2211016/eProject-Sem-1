@@ -6,7 +6,8 @@
     <div class="row">
       <!-- categories list -->
       <div class="col-12 col-md-2 mt-5">
-        <div class="categories-list">
+        <!-- desktop -->
+        <div class="categories-list d-md-block d-none">
           <h2 class="mb-5 border-bottom border-2">Categories</h2>
           <div class="my-3 ms-2">
             <a routerLink="/categories/all-products">All</a>
@@ -14,6 +15,23 @@
           <div class="my-3 ms-2 text-capitalize" *ngFor="let category of categories">
             <a routerLink="/categories/{{category.name}}">{{ category.name
               }}</a>
+          </div>
+        </div>
+        <!-- mobile -->
+        <div class="categories-list d-md-none">
+          <div class="d-flex justify-content-between align-items-baseline mb-5 border-bottom border-2">
+            <h2>Categories</h2>
+            <i class="bi bi-chevron-down" data-bs-toggle="collapse" data-bs-target="#cart-list" aria-expanded="false"
+              aria-controls="cart-list"></i>
+          </div>
+          <div class="collapse" id="cart-list">
+            <div class="my-3 ms-2">
+              <a routerLink="/categories/all-products">All</a>
+            </div>
+            <div class="my-3 ms-2 text-capitalize" *ngFor="let category of categories">
+              <a routerLink="/categories/{{category.name}}">{{ category.name
+                }}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -29,5 +47,4 @@
       <!-- end of show products -->
     </div>
   </div>
-
 </section>

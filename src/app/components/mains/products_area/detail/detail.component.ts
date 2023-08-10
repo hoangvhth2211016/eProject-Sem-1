@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart/cart.service';
 import { ComparisonService } from 'src/app/services/compare/comparison.service';
 import { DocService } from 'src/app/services/document/doc.service';
 import { ProductService } from 'src/app/services/products/product.service';
+import { Message } from 'src/app/models/Message/message.model';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class DetailComponent implements OnInit {
   });
   productImage!: ArrayBuffer;
   logo!: ArrayBuffer;
+  message!: Message;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,21 +41,25 @@ export class DetailComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       if (params['id']) {
-        this.productService.getProductById(params['id']).subscribe(product => {
-          this.product = product;
-          this.productService.getRelatedProduct(product).subscribe(products => {
-            this.relatedProducts = products;
-          });
-          this.docService.getImage(this.product.image).subscribe(buffer => {
-            this.productImage = buffer;
-          });
-          this.docService.getImage('/assets/images/logo-image.jpg').subscribe(buffer => {
-            this.logo = buffer;
-          });
+        this.productService.getProductById(params['id']).subscribe(res => {
+          console.log(res);
+          if (res) {
+            this.product = res;
+            this.productService.getRelatedProduct(res).subscribe(products => {
+              this.relatedProducts = products;
+            });
+            this.docService.getImage(this.product.image).subscribe(buffer => {
+              this.productImage = buffer;
+            });
+            this.docService.getImage('/assets/images/logo-image.jpg').subscribe(buffer => {
+              this.logo = buffer;
+            });
+          } else {
+            this.message = new Message('Oh no!', 'The product that you are looking for is not available.');
+          }
         })
       }
     });

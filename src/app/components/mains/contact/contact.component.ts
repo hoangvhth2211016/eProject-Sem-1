@@ -31,6 +31,7 @@ export class ContactComponent implements OnInit {
 
   }
 
+  // submit contact form
   onSubmit() {
     this.submitted = true;
     this.contactService.submitForm(this.contactForm);

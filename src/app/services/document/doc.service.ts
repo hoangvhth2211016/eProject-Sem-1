@@ -13,6 +13,7 @@ export class DocService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // get image
   getImage(url: string): Observable<any> {
     return this.httpClient.get(url, { responseType: 'blob' }).pipe(mergeMap(res => {
       const bufferPromise = res.arrayBuffer();
@@ -22,6 +23,7 @@ export class DocService {
     }))
   }
 
+  // create a new document for product
   createDocument(productImage: ArrayBuffer, logo: ArrayBuffer, product: Product) {
     let document = new Doc.Document({
       sections: [

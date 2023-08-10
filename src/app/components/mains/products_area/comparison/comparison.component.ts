@@ -15,6 +15,7 @@ export class ComparisonComponent implements OnInit {
     this.products = this.comparisonService.compareList;
   }
 
+  // remove product from compare list
   removeFromCompareList(index: number) {
     this.comparisonService.removeFromCompareList(index);
   }

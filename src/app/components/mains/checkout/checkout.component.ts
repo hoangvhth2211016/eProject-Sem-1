@@ -25,6 +25,7 @@ export class CheckoutComponent implements OnInit {
     this.user = this.userInfoService.getUserInfo();
   }
 
+  // confirm purchase, then clear cart and remove user
   confirmPurchase() {
     this.messageService.setMessage("Thank you for your purchase!", "Your will be processed and sent shortly.");
     this.cartService.clearCart();
